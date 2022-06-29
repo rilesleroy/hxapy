@@ -131,9 +131,9 @@ def write_node(os_file, node):
         write_meta(os_file, meta)
 
     if(node.node_type == Node_Type.Geometry):
-        write_geometry_node(os_file, node)
+        write_geometry_node(os_file, node.content)
     elif(node.node_type == Node_Type.Image):
-        write_image_node(os_file, node)
+        write_image_node(os_file, node.content)
 
 def write_meta(os_file, meta):
     os_file.write(ctypes.c_uint8(len(meta.name)))
@@ -157,7 +157,11 @@ def write_meta(os_file, meta):
 
     elif (meta.data_type == Meta_Type.Text):
         os_file.write(ctypes.c_uint32(len(meta.data)))
-        os_file.write(bytes(meta.data, 'utf-8'))
+        string = ''
+        for c in meta.data:
+            string += c
+        strval = bytes(string, 'utf-8')
+        os_file.write(strval)
 
     elif (meta.data_type == Meta_Type.Binary):
         os_file.write(ctypes.c_uint32(len(meta.data)))
@@ -199,8 +203,6 @@ def write_image_node(os_file, content):
         write_layer(os_file, layer)
 
 def write_layer(os_file, layer):
-    os_file.write(ctypes.c_uint8(len(meta.name)))
-    os_file.write(bytes(meta.name, 'utf-8'))
     os_file.write(ctypes.c_uint8(layer.data_type))
 
     if (layer.data_type == Layer_Data_Type.Uint8):
@@ -232,7 +234,7 @@ def DEBUG_quad():
     print("making quad vertex data...")
     vertex_data = [1.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, -1.0]
     vertex_count = len(vertex_data)
-    vertex_stack = Layer(CONVENTION_HARD_BASE_VERTEX_LAYER_NAME, CONVENTION_HARD_BASE_VERTEX_LAYER_COMPONENTS, Layer_Data_Type.Float, vertex_data)
+    vertex_stack = [Layer(CONVENTION_HARD_BASE_VERTEX_LAYER_NAME, CONVENTION_HARD_BASE_VERTEX_LAYER_COMPONENTS, Layer_Data_Type.Float, vertex_data)]
 
     print("making quad vertex data...")
     corner_data = [0, 1, 2, -4]
@@ -260,6 +262,7 @@ def DEBUG_quad():
     header = Header(MAGIC_NUMBER, LATEST_VERSION, len(nodes))
     hxa_file = File(header, nodes)
 
+    print("writing to file...")
     write_to_file("quad.hxa", hxa_file)
 
 DEBUG_quad()

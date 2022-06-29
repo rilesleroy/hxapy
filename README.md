@@ -6,7 +6,7 @@ implemented in a day with out much hassle. If you want
 an overiew of HxA I reccemend checking Eskil's Original
 Video here: 
 
-![video demo of the HxA file format](https://www.youtube.com/watch?v=jlNSbSutPZE)
+![video demo of the HxA file format](https://youtube.com/embed/watch?v=jlNSbSutPZE)
 
 # What Currently supported
 [x] The basic "in-memory" class copposition of the file.

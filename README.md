@@ -11,5 +11,4 @@ https://youtu.be/watch?v=jlNSbSutPZE
 # What Currently supported
 - [x] The basic "in-memory" class composition of the file.
 - [x] writing to a file
-- [x] 
 - [ ] reading from a file

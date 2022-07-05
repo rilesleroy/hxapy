@@ -228,7 +228,7 @@ def write_string(os_file, string):
     os_file.write(ctypes.c_uint32(len(string)))
     os_file.write(bytes(string, 'utf-8'))
 
-def DEBUG_quad():
+def hello_hxa_triangle():
 
 
     # CONVENTION_HARD_BASE_VERTEX_LAYER_NAME       = "vertex"
@@ -241,28 +241,28 @@ def DEBUG_quad():
     # CONVENTION_HARD_EDGE_NEIGHBOUR_LAYER_NAME    = "neighbour"
     # CONVENTION_HARD_EDGE_NEIGHBOUR_LAYER_TYPE    = Layer_Data_Type.Int32
 
-    vertex_count = 4
-    vertex_position_data = [-1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, -1.0, -1.0, 0.0, -1.0]
+    vertex_count = 3
+    vertex_position_data = [-1.0, 0.0, 0.0, 0.0, 0.0, 2.0, 1.0, 0.0, 0.0]
     vertex_position_layer = Layer(CONVENTION_HARD_BASE_VERTEX_LAYER_NAME, CONVENTION_HARD_BASE_VERTEX_LAYER_COMPONENTS, Layer_Data_Type.Float, vertex_position_data)
-    vertex_uv_data = [0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0]
+    vertex_uv_data = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     vertex_uv_layer = Layer(CONVENTION_SOFT_LAYER_NAME_UV, 2, Layer_Data_Type.Float, vertex_uv_data)
-    vertex_normal_data = [0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0]
+    vertex_normal_data = [0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0]
     vertex_normal_layer = Layer(CONVENTION_SOFT_LAYER_NORMALS, 3, Layer_Data_Type.Float, vertex_normal_data)
     vertex_stack = [vertex_position_layer, vertex_uv_layer, vertex_normal_layer]
 
 
-    corner_data = [0, 1, 2, -4]
+    corner_data = [0, 1, -3]
     corner_stack = [Layer(CONVENTION_HARD_BASE_CORNER_LAYER_NAME, CONVENTION_HARD_BASE_CORNER_LAYER_COMPONENTS, CONVENTION_HARD_BASE_CORNER_LAYER_TYPE, corner_data)]
     
 
-    edge_data = [0, 1, 1, 2, 2, 3, 3, 0]
+    edge_data = [0, 1, 1, 2, 2, 0]
     edge_stack = [Layer(CONVENTION_HARD_EDGE_NEIGHBOUR_LAYER_NAME, 2, CONVENTION_HARD_EDGE_NEIGHBOUR_LAYER_TYPE, edge_data)]
-    edge_corner_count = 4
+    edge_corner_count = 3
 
- 
-    face_stack = []
-    face_count = 0
-
+    face_data = [0]
+    face_layer = Layer("faces", 1, Layer_Data_Type.Int32, face_data)
+    face_stack = [face_layer]
+    face_count = 1
   
     content = Node_Geomety(vertex_count, vertex_stack, edge_corner_count, corner_stack, edge_stack, face_count, face_stack)
 
@@ -278,4 +278,4 @@ def DEBUG_quad():
 
     write_to_file("assets/test.hxa", hxa_file)
 
-DEBUG_quad()
+hello_hxa_triangle()

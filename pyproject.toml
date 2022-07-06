@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "hxa"
-version = "0.0.30"
+version = "0.0.4"
 authors = [
   { name="Riles Leroy", email="rilesleroy@gmail.com" },
 ]
@@ -17,3 +17,6 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+
+[project.urls]
+"Homepage" = "https://github.com/shmoich/hxapy"

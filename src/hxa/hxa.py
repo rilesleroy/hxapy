@@ -228,7 +228,7 @@ def write_string(os_file, string):
     os_file.write(ctypes.c_uint32(len(string)))
     os_file.write(bytes(string, 'utf-8'))
 
-def hxa_triangle():
+def triangle():
     vertex_count = 3
     vertex_position_data = [-1.0, 0.0, 0.0, 0.0, 0.0, 2.0, 1.0, 0.0, 0.0]
     vertex_position_layer = Layer(CONVENTION_HARD_BASE_VERTEX_LAYER_NAME, CONVENTION_HARD_BASE_VERTEX_LAYER_COMPONENTS, Layer_Data_Type.Float, vertex_position_data)

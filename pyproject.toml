@@ -3,12 +3,12 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "hxa"
-version = "0.0.4"
+name = "hxapy"
+version = "0.0.11"
 authors = [
   { name="Riles Leroy", email="rilesleroy@gmail.com" },
 ]
-description = "A small example package"
+description = "A hxa library for python"
 readme = "README.md"
 license = { file="LICENSE" }
 requires-python = ">=3.7"

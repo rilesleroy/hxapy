@@ -17,12 +17,12 @@ https://github.com/odin-lang/Odin/tree/master/core/encoding/hxa
 # Installation
 This library is being hosted on PYPI so you can install it by simply using
 
-```pip install hxa```
+```pip install hxapy```
 
 You can test if everything is working import the library and give the `hxa.triangle()` function ago
 
 ```python
-import hxa
+from hxapy import hxa
 triangle = hxa.triangle()
 hxa.write_to_file("path/to/file.hxa", triangle)
 ```

@@ -8,7 +8,7 @@ If you want an overiew of HxA I recomend checking Eskil's Original
 Video here: 
 https://youtu.be/watch?v=jlNSbSutPZE
 
-Also checkout the original HxA repo and C implementation herehere:
+Also checkout the original HxA repo and C implementation here:
 https://github.com/quelsolaar/HxA
 
 This library was modeled after gingerbill's odin implementation of hxa which can be found here:

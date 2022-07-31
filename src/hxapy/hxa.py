@@ -116,6 +116,7 @@ def write_to_file (filepath, hxa_file):
     write_header(os_file, hxa_file.header)
     for node in hxa_file.nodes:
         write_node(os_file, node)
+    os_file.close()
 
 def write_header(os_file, header):
     print("writing header")
@@ -219,14 +220,70 @@ def write_layer(os_file, layer):
             os_file.write(ctypes.c_double(value))
 
 def write_name(os_file, name):
-    print("writing name: " + name)
     os_file.write(ctypes.c_uint8(len(name)))
     os_file.write(bytes(name, 'utf-8'))
 
 def write_string(os_file, string):
-    print("writing string: " + string)
     os_file.write(ctypes.c_uint32(len(string)))
     os_file.write(bytes(string, 'utf-8'))
+
+def print_file(hxa_file):
+    print(f"magic_number: {hxa_file.header.magic_number}")
+    print(f"version: {hxa_file.header.version}")
+    print(f"node_count: {hxa_file.header.node_count}")
+
+    node_counter = 0
+    for node in hxa_file.nodes:
+        print(f"  node: {node_counter}")
+        print_node(node)
+        node_counter += 1
+
+def print_node(node):
+    if node.node_type == Node_Type.Meta_Only:
+        print("  Meta Only Node")
+
+    if node.node_type == Node_Type.Geometry:
+        print("  Geometry Node")
+        print("    Meta Stack")
+        for meta in node.meta_stack:
+            print_meta(meta)
+        print_geometry(node.content)
+
+    if node.node_type == Node_Type.Image:
+        print("  Image Node")
+        print_image(node.content)
+
+def print_geometry(content):
+    print(f"    vertex_count: {content.vertex_count}")
+    for layer in content.vertex_stack:
+        print_layer(layer)
+
+    print(f"    edge_corner_count: {content.edge_corner_count}")
+    for layer in content.corner_stack:
+        print_layer(layer)
+    for layer in content.edge_stack:
+        print_layer(layer)
+
+    print(f"    face_count: {content.face_count}")
+    for layer in content.face_stack:
+        print_layer(layer)
+
+def print_image(content):
+    print(f"   image_type: {content.image_type}")
+    print(f"   resolution: {content.resolution}")
+    for layer in image_stack:
+        print_layer(layer)
+
+def print_meta(meta):
+    print(f"      name: {meta.name}")
+    print(f"      data_type: {meta.data_type}")
+    print(f"      data: {meta.data}")
+
+def print_layer(layer):
+    print(f"      name: {layer.name}")
+    print(f"      components: {layer.components}")
+    print(f"      data_type: {layer.data_type}")
+    print(f"      data: {layer.data}")
 
 def triangle():
     vertex_count = 3

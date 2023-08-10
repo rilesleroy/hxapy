@@ -34,8 +34,3 @@ This library was made to help with the creation of HxA exporters and importers f
 Eskil's original C implementation (and collection of converters) were great at demoing the format but
 wasnt great for tool integration. I'm hoping that by providing a way to use the HxA format in native python
 it would help to etablish a larger ecosystem of tools and addons around the format.
-
-# 0.1.0 checklist
-- [x] The basic "in-memory" class composition of the file.
-- [x] writing to a file
-- [ ] reading from a file - (Open a PR if you need this ASAP, otherwise I'll be working on a blender exporter first)
